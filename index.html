@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dogymorbis - Мир любви собак</title>
+  
+  <!-- PWA Meta Tags -->
+  <meta name="description" content="Мобильное приложение для владельцев собак. Собирай косточки, знакомься с друзьями и заботься о своём питомце.">
+  <meta name="theme-color" content="#8CB3FF">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Dogymorbis">
+  
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json">
+  
+  <!-- Icons -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦴</text></svg>">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦴</text></svg>">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Montserrat+Alternates:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+  <!-- Loading Indicator -->
+  <div id="loading-indicator" class="loading-indicator" style="display: none;">
+    <div class="loading-spinner">
+      <div class="bone-icon">🦴</div>
+      <p>Загрузка...</p>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <button id="burger-menu" class="burger-menu" aria-label="Открыть меню">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      
+      <h1 class="app-title">Dogymorbis</h1>
+      
+      <div class="header-actions">
+        <div class="bone-balance">
+          <img src="assets/bone.svg" alt="Косточка" class="bone-icon">
+          <span class="balance">0</span>
+        </div>
+        <button class="notification-btn">
+          <span class="notification-icon">🔔</span>
+          <span class="notification-badge" style="display: none;">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sidebar Menu -->
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+      <div class="user-info">
+        <div class="user-avatar">
+          <div style="width: 50px; height: 50px; border-radius: 50%; background: var(--color-secondary); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">👤</div>
+        </div>
+        <div class="user-details">
+          <h3 id="user-name">Пользователь</h3>
+          <p id="user-level">Уровень 5</p>
+        </div>
+      </div>
+    </div>
+    
+    <nav class="sidebar-nav">
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a href="/" class="nav-link" data-route="/">
+            <img src="assets/dog_marker.svg" alt="Карта" class="nav-icon">
+            <span class="nav-text">Карта</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/feed" class="nav-link" data-route="/feed">
+            <span class="nav-icon">📱</span>
+            <span class="nav-text">Лента</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/friends" class="nav-link" data-route="/friends">
+            <span class="nav-icon">👥</span>
+            <span class="nav-text">Друзья</span>
+            <span class="nav-badge" style="display: none;">0</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/chat" class="nav-link" data-route="/chat">
+            <span class="nav-icon">💬</span>
+            <span class="nav-text">Чаты и группы</span>
+            <span class="nav-badge" style="display: none;">0</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/events" class="nav-link" data-route="/events">
+            <span class="nav-icon">📅</span>
+            <span class="nav-text">События</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/shop" class="nav-link" data-route="/shop">
+            <span class="nav-icon">🛍️</span>
+            <span class="nav-text">Магазин</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/pets" class="nav-link" data-route="/pets">
+            <img src="assets/dog_house.svg" alt="Питомцы" class="nav-icon">
+            <span class="nav-text">Мои питомцы</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/routes" class="nav-link" data-route="/routes">
+            <span class="nav-icon">🛤️</span>
+            <span class="nav-text">Маршруты</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/quests" class="nav-link" data-route="/quests">
+            <img src="assets/paw.svg" alt="Квесты" class="nav-icon">
+            <span class="nav-text">Задачи и квесты</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/partners" class="nav-link" data-route="/partners">
+            <span class="nav-icon">🤝</span>
+            <span class="nav-text">Партнёры</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/help" class="nav-link" data-route="/help">
+            <span class="nav-icon">🆘</span>
+            <span class="nav-text">Помощь / SOS</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/settings" class="nav-link" data-route="/settings">
+            <span class="nav-icon">⚙️</span>
+            <span class="nav-text">Настройки</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    
+    <div class="sidebar-footer">
+      <button id="logout-btn" class="logout-btn">
+        <span class="nav-icon">🚪</span>
+        <span class="nav-text">Выйти</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main id="main-content" class="main-content">
+    <!-- Контент будет загружаться динамически через роутер -->
+  </main>
+
+  <!-- Bottom Navigation -->
+  <nav class="navbar">
+    <div class="navbar-item active" data-route="/" title="Карта">
+      <img src="assets/dog_marker.svg" alt="Карта" class="navbar-icon">
+      <span>Карта</span>
+    </div>
+    <div class="navbar-item" data-route="/feed" title="Лента">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 9h18v10a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+        <path d="M3 9V5a2 2 0 012-2h14a2 2 0 012 2v4"/>
+        <path d="M9 13h6"/>
+      </svg>
+      <span>Лента</span>
+    </div>
+    <div class="navbar-item" data-route="/shop" title="Магазин">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6"/>
+      </svg>
+      <span>Магазин</span>
+    </div>
+    <div class="navbar-item" data-route="/dao" title="Сообщество">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M23 21v-2a4 4 0 00-3-3.87"/>
+        <path d="M16 3.13a4 4 0 010 7.75"/>
+      </svg>
+      <span>DAO</span>
+    </div>
+    <div class="navbar-item" data-route="/profile" title="Профиль">
+      <img src="assets/dog_house.svg" alt="Профиль" class="navbar-icon">
+      <span>Профиль</span>
+    </div>
+  </nav>
+
+  <!-- Floating Action Buttons -->
+  <div class="floating-actions">
+    <button class="fab-button fab-main" data-action="create" title="Создать">
+      <span>+</span>
+    </button>
+    <button class="fab-button" data-action="ai" title="AI помощник">
+      <img src="assets/ear_bubble.svg" alt="AI" class="fab-icon">
+    </button>
+    <button class="fab-button" data-action="walk" title="Начать прогулку">
+      <img src="assets/paw.svg" alt="Прогулка" class="fab-icon">
+    </button>
+    <button class="fab-button" data-action="event" title="Создать событие">
+      <span>📅</span>
+    </button>
+  </div>
+
+  <!-- Chat Overlay -->
+  <div class="chat-overlay">
+    <div class="chat-toggle">
+      <span class="chat-icon">💬</span>
+      <span class="chat-text">Глобальный чат</span>
+      <span class="unread-count" style="display: none;">0</span>
+    </div>
+  </div>
+
+  <!-- Install Prompt -->
+  <div id="install-prompt" class="install-prompt" style="display: none;">
+    <div class="install-prompt-content">
+      <h3>Установить Dogymorbis?</h3>
+      <p>Получите быстрый доступ к приложению с главного экрана</p>
+      <div class="install-prompt-buttons">
+        <button class="button" id="install-btn">Установить</button>
+        <button class="button secondary" id="dismiss-install">Позже</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Container -->
+  <div id="notification-container" class="notification-container"></div>
+
+  <!-- Scripts -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

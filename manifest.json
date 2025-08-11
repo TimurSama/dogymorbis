@@ -1,0 +1,35 @@
+{
+  "name": "Dogymorbis - Мир любви собак",
+  "short_name": "Dogymorbis",
+  "description": "Мобильное приложение для владельцев собак. Собирай косточки, знакомься с друзьями и заботься о своём питомце.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F2E985",
+  "theme_color": "#8CB3FF",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "ru",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><text y='.9em' font-size='180'>🦴</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><text y='.9em' font-size='480'>🦴</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["lifestyle", "social", "health"],
+  "screenshots": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1280 720'><rect width='1280' height='720' fill='%23F2E985'/><text x='640' y='360' text-anchor='middle' font-size='60'>Dogymorbis</text></svg>",
+      "sizes": "1280x720",
+      "type": "image/svg+xml",
+      "form_factor": "wide"
+    }
+  ]
+} 
