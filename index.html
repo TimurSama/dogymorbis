@@ -164,7 +164,56 @@
 
   <!-- Main Content -->
   <main id="main-content" class="main-content">
-    <!-- Контент будет загружаться динамически через роутер -->
+    <!-- Страница карты -->
+    <div id="map-page" class="page active" data-page="/">
+      <div class="page-content">
+        <h2>Карта</h2>
+        <p>Здесь будет интерактивная карта с собаками и событиями</p>
+        <div class="map-placeholder">
+          <div style="width: 100%; height: 300px; background: #f0f0f0; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #666;">
+            🗺️ Карта загружается...
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Страница ленты -->
+    <div id="feed-page" class="page" data-page="/feed">
+      <div class="page-content">
+        <h2>Лента</h2>
+        <p>Лента событий и новостей</p>
+        <div class="feed-placeholder">
+          <div style="padding: 20px; background: #f9f9f9; border-radius: 10px; margin: 10px 0;">
+            <h3>Новое событие</h3>
+            <p>Собачья прогулка в парке</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Страница магазина -->
+    <div id="shop-page" class="page" data-page="/shop">
+      <div class="page-content">
+        <h2>Магазин</h2>
+        <p>Покупки для вашего питомца</p>
+      </div>
+    </div>
+
+    <!-- Страница DAO -->
+    <div id="dao-page" class="page" data-page="/dao">
+      <div class="page-content">
+        <h2>Сообщество DAO</h2>
+        <p>Управление сообществом</p>
+      </div>
+    </div>
+
+    <!-- Страница профиля -->
+    <div id="profile-page" class="page" data-page="/profile">
+      <div class="page-content">
+        <h2>Профиль</h2>
+        <p>Ваш профиль и настройки</p>
+      </div>
+    </div>
   </main>
 
   <!-- Bottom Navigation -->
@@ -243,6 +292,115 @@
   <div id="notification-container" class="notification-container"></div>
 
   <!-- Scripts -->
+  <script>
+    // Простой JavaScript для тестирования
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('DOM загружен');
+      
+      // Инициализация бургер меню
+      const burgerMenu = document.getElementById('burger-menu');
+      const sidebar = document.getElementById('sidebar');
+      
+      if (burgerMenu && sidebar) {
+        burgerMenu.addEventListener('click', function() {
+          sidebar.classList.toggle('active');
+          console.log('Бургер меню кликнут');
+        });
+      }
+      
+      // Инициализация навигации в сайдбаре
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const route = this.getAttribute('data-route');
+          console.log('Навигация на:', route);
+          
+          // Простая навигация
+          document.querySelectorAll('.page').forEach(page => {
+            page.classList.remove('active');
+          });
+          
+          const targetPage = document.querySelector(`[data-page="${route}"]`);
+          if (targetPage) {
+            targetPage.classList.add('active');
+          }
+          
+          // Обновление активной ссылки
+          navLinks.forEach(l => l.classList.remove('active'));
+          this.classList.add('active');
+          
+          // Закрытие сайдбара
+          sidebar.classList.remove('active');
+        });
+      });
+      
+      // Инициализация нижней навигации
+      const navbarItems = document.querySelectorAll('.navbar-item');
+      navbarItems.forEach(item => {
+        item.addEventListener('click', function() {
+          const route = this.getAttribute('data-route');
+          console.log('Нижняя навигация на:', route);
+          
+          // Простая навигация
+          document.querySelectorAll('.page').forEach(page => {
+            page.classList.remove('active');
+          });
+          
+          const targetPage = document.querySelector(`[data-page="${route}"]`);
+          if (targetPage) {
+            targetPage.classList.add('active');
+          }
+          
+          // Обновление активной кнопки
+          navbarItems.forEach(i => i.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+      
+      // Инициализация плавающих кнопок
+      const fabButtons = document.querySelectorAll('.fab-button');
+      fabButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+          const action = this.getAttribute('data-action');
+          console.log('Действие:', action);
+          
+          switch(action) {
+            case 'walk':
+              alert('Начинаем прогулку!');
+              break;
+            case 'create':
+              alert('Создаем событие!');
+              break;
+            case 'ai':
+              alert('Открываем AI помощника!');
+              break;
+            case 'event':
+              alert('Создаем событие!');
+              break;
+          }
+        });
+      });
+      
+      // Инициализация уведомлений
+      const notificationBtn = document.querySelector('.notification-btn');
+      if (notificationBtn) {
+        notificationBtn.addEventListener('click', function() {
+          alert('Уведомления');
+        });
+      }
+      
+      // Инициализация чата
+      const chatToggle = document.querySelector('.chat-toggle');
+      if (chatToggle) {
+        chatToggle.addEventListener('click', function() {
+          alert('Открываем глобальный чат!');
+        });
+      }
+      
+      console.log('JavaScript инициализирован');
+    });
+  </script>
   <script type="module" src="js/app.js"></script>
 </body>
 </html>

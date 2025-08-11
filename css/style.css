@@ -2150,3 +2150,51 @@ body.mobile {
   vertical-align: middle;
   margin-left: 0.25rem;
 }
+
+/* Стили для страниц */
+.page {
+  display: none;
+  padding: 20px;
+  margin-top: var(--header-height);
+  margin-bottom: var(--navbar-height);
+  min-height: calc(100vh - var(--header-height) - var(--navbar-height));
+}
+
+.page.active {
+  display: block;
+}
+
+.page-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+}
+
+.page-content h2 {
+  color: var(--color-graphite);
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+}
+
+.page-content p {
+  color: var(--color-grey);
+  margin-bottom: 1.5rem;
+}
+
+/* Адаптивность для страниц */
+@media (max-width: 768px) {
+  .page {
+    padding: 10px;
+  }
+  
+  .page-content {
+    padding: 15px;
+  }
+  
+  .page-content h2 {
+    font-size: 1.5rem;
+  }
+}
