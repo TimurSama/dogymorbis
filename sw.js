@@ -1,10 +1,37 @@
 // Service Worker для Dogymorbis PWA
-const CACHE_NAME = 'dogymorbis-v1.0.0';
-const STATIC_CACHE = 'dogymorbis-static-v1';
-const DYNAMIC_CACHE = 'dogymorbis-dynamic-v1';
+const CACHE_NAME = 'dogymorbis-v1.0.1';
+const STATIC_CACHE = 'dogymorbis-static-v1.1';
+const DYNAMIC_CACHE = 'dogymorbis-dynamic-v1.1';
 
 // Файлы для кэширования
 const STATIC_FILES = [
+  '/dogymorbis/',
+  '/dogymorbis/index.html',
+  '/dogymorbis/css/style.css',
+  '/dogymorbis/css/animations.css',
+  '/dogymorbis/js/config.js',
+  '/dogymorbis/js/app.js',
+  '/dogymorbis/js/components/router.js',
+  '/dogymorbis/js/services/state.js',
+  '/dogymorbis/js/services/auth.js',
+  '/dogymorbis/js/services/map.js',
+  '/dogymorbis/js/services/chat.js',
+  '/dogymorbis/js/services/notifications.js',
+  '/dogymorbis/assets/gradient_texture.png',
+  '/dogymorbis/assets/wool_texture.png',
+  '/dogymorbis/assets/gradient_swirl.png',
+  '/dogymorbis/assets/wool_swirl.png',
+  '/dogymorbis/assets/abstract_swirl.png',
+  '/dogymorbis/assets/bone.svg',
+  '/dogymorbis/assets/dog_house.svg',
+  '/dogymorbis/assets/dog_marker.svg',
+  '/dogymorbis/assets/ear_bubble.svg',
+  '/dogymorbis/assets/paw.svg',
+  '/dogymorbis/manifest.json'
+];
+
+// Альтернативные пути для локальной разработки
+const STATIC_FILES_LOCAL = [
   '/',
   '/index.html',
   '/css/style.css',
@@ -30,6 +57,12 @@ const STATIC_FILES = [
   '/manifest.json'
 ];
 
+// Определяем правильные пути в зависимости от окружения
+const getStaticFiles = () => {
+  const isGitHubPages = location.hostname === 'timursama.github.io';
+  return isGitHubPages ? STATIC_FILES : STATIC_FILES_LOCAL;
+};
+
 // Установка Service Worker
 self.addEventListener('install', (event) => {
   console.log('Service Worker: Installing...');
@@ -37,9 +70,10 @@ self.addEventListener('install', (event) => {
     caches.open(STATIC_CACHE)
       .then((cache) => {
         console.log('Service Worker: Caching static files');
+        const filesToCache = getStaticFiles();
         // Кэшируем файлы по одному, чтобы избежать ошибок
         return Promise.allSettled(
-          STATIC_FILES.map(url => 
+          filesToCache.map(url => 
             cache.add(url).catch(error => {
               console.warn(`Service Worker: Failed to cache ${url}:`, error);
               return null;
@@ -128,8 +162,8 @@ self.addEventListener('sync', (event) => {
 self.addEventListener('push', (event) => {
   const options = {
     body: event.data ? event.data.text() : 'Новое уведомление от Dogymorbis!',
-    icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192"><text y=".9em" font-size="180">🦴</text></svg>',
-    badge: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72"><text y=".9em" font-size="60">🦴</text></svg>',
+    icon: '/dogymorbis/assets/bone.svg',
+    badge: '/dogymorbis/assets/paw.svg',
     vibrate: [100, 50, 100],
     data: {
       dateOfArrival: Date.now(),
@@ -139,12 +173,12 @@ self.addEventListener('push', (event) => {
       {
         action: 'explore',
         title: 'Открыть',
-        icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192"><text y=".9em" font-size="180">🦴</text></svg>'
+        icon: '/dogymorbis/assets/dog_marker.svg'
       },
       {
         action: 'close',
         title: 'Закрыть',
-        icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192"><text y=".9em" font-size="180">🦴</text></svg>'
+        icon: '/dogymorbis/assets/paw.svg'
       }
     ]
   };
@@ -160,7 +194,7 @@ self.addEventListener('notificationclick', (event) => {
 
   if (event.action === 'explore') {
     event.waitUntil(
-      clients.openWindow('/')
+      clients.openWindow('/dogymorbis/')
     );
   }
 });

@@ -1,0 +1,31 @@
+{
+  "name": "dogymorbis",
+  "version": "1.0.0",
+  "description": "Мобильное веб-приложение для владельцев собак",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "dev": "python -m http.server 8000",
+    "serve": "python -m http.server 8000",
+    "build": "echo 'No build step required'",
+    "deploy": "echo 'Deploy to GitHub Pages'"
+  },
+  "keywords": [
+    "pwa",
+    "dogs",
+    "social",
+    "mobile",
+    "web-app",
+    "progressive-web-app"
+  ],
+  "author": "TimurSama",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TimurSama/dogymorbis.git"
+  },
+  "homepage": "https://timursama.github.io/dogymorbis/",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+} 
